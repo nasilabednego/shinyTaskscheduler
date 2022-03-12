@@ -3,7 +3,7 @@ Type: Package
 Title: Set time for Shiny app Server to execute your code
 Version: 0.1.0
 Author: Abednego Nasila
-Maintainer: Abednego Nasila <alisanabednego@sgmail.com>
+Maintainer: Abednego Nasila <alisanabednego@gmail.com>
 Description: Run shiny app functions at your specified time intervals.
 License: MIT license
 Encoding: UTF-8
