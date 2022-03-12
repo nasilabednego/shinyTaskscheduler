@@ -16,7 +16,7 @@ library(shinyTaskscheduler)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-applyshinySchedulexpr(),
+applyshinySchedule(),
     # Application title
     titlePanel("Old Faithful Geyser Data"),
 
