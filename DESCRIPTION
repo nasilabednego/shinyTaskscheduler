@@ -1,4 +1,4 @@
-Package: nasilAbednego
+Package: shinyTaskscheduler
 Type: Package
 Title: Set time for Shiny app Server to execute your code
 Version: 0.1.0
