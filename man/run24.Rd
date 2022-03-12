@@ -1,12 +1,12 @@
 \name{RunAtInterval.every24hr}
 \alias{RunAtInterval.every24hr}
-\title{Schedule Shiny app to run the code at your specified time interval every 24hr}
+\title{Schedule Shiny app to run the code at your specified time interval every 24 hr}
 \usage{
 
   RunAtInterval.every24hr(start='', stop='', expr)
 }
 \description{
-  Enables shiny app to run the code every 24hr between your time intervals.
+  Enables shiny app to run the code every 24 hr between your time intervals.
   start and stop are times in the format 'hour:min:sec'
 }
 \examples{
