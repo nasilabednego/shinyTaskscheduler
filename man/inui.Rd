@@ -1,11 +1,11 @@
-\name{applyshinySchedulexpr}
-\alias{applyshinySchedulexpr}
-\title{Use scheduleTask}
+\name{applyshinySchedule}
+\alias{applyshinySchedule}
+\title{Use shinySchedule}
 \usage{
 applyshinySchedule()
 }
 \description{
-Call applyshinySchedulexpr() anywhere in uiR.
+Call applyshinySchedule() anywhere in uiR.
 }
 \examples{
 # call this in your shiny app ui
