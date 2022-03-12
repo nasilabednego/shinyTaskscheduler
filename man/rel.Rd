@@ -1,12 +1,12 @@
 \name{reloadAt.every24hr}
 \alias{reloadAt.every24hr}
-\title{Schedule Shiny app to reload page at your specified time every 24hr}
+\title{Schedule Shiny app to reload page at your specified time every 24 hr}
 \usage{
 # run this in your shiny app serverR
 reloadAt.every24hr(time='')
 }
 \description{
-Enables shiny app to refresh page every 24hr at the time you specified.
+Enables shiny app to refresh page every 24 hr at the time you specified.
 time should be in the format 'hour:min:sec'
 }
 \examples{
