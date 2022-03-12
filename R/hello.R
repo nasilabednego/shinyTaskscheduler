@@ -51,6 +51,7 @@ RunAtInterval.every24hr <-function(start,stop,expr) {
       lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), stop)))-lubridate::seconds_to_period(Sys.time())))*1000),
       shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1000); } setTimeout(reload_page, 1000); "))}
   eval(
+      if(start<stop){
     if(lubridate::seconds_to_period(Sys.time())>=lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), start))) &&
        lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), stop)))>=lubridate::seconds_to_period(Sys.time()))
     {expr}#else
@@ -58,6 +59,12 @@ RunAtInterval.every24hr <-function(start,stop,expr) {
     # shinyjs::delay(as.numeric(lubridate::seconds(round(
     #  lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), time)))-lubridate::seconds_to_period(Sys.time())))*1000),
     #code)}
+  }else
+    if(start>stop){
+      if(lubridate::seconds_to_period(Sys.time())>=lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), start))) &&
+         lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())+1), stop)))>=lubridate::seconds_to_period(Sys.time()))
+      {expr}
+    }
   )
 }
 
