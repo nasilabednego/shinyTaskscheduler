@@ -1,0 +1,13 @@
+Package: nasilAbednego
+Type: Package
+Title: Set time for Shiny app Server to execute your code
+Version: 0.1.0
+Author: Abednego Nasila
+Maintainer: Abednego Nasila <alisanabednego@sgmail.com>
+  Description: Run shiny app functions at your specified time intervals.
+License: MIT license
+Encoding: UTF-8
+LazyData: true
+Imports: lubridate, shinyjs
+RoxygenNote: 7.1.2
+Language: en-Us
