@@ -17,7 +17,7 @@
 
   # Define UI for application that draws a histogram
   ui <- fluidPage(
-    applySchedule(),
+    applyshinySchedule(),
     # Application title
     titlePanel("Old Faithful Geyser Data"),
 
