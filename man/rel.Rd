@@ -12,7 +12,7 @@ time should be in the format 'hour:min:sec'
 \examples{
 
 library(shiny)
-library(shinyScheduletask)
+library(shinyTaskscheduler)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
