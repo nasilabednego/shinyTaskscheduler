@@ -125,7 +125,7 @@ shiny::observe({
     if(active())
     {
       timerh(timerh()-1)
-      if(timerh()<1)
+      if(timerh()>1)
       {
         active(T)
 
@@ -137,7 +137,9 @@ shiny::observe({
 
 
 
-      }
+      }if(timerh()<1)
+      {
+        active(F)}
     }
   })
 })
