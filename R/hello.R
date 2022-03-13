@@ -127,7 +127,7 @@ shiny::observe({
       timerh(timerh()-1)
       if(timerh()<1)
       {
-        active(F)
+        active(T)
 
         shiny::showModal(shiny::modalDialog(size = 'l',
                                 title = "Message",
