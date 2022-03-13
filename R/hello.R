@@ -93,7 +93,7 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
-countdown<-function(Time_To='', alert_message=''){
+countdown<-function(Time_To='', alert_message='',session){
 
 if(as.numeric(lubridate::seconds_to_period(Sys.time()))<=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59'))))){
   shinyjs::delay(as.numeric(lubridate::seconds(round(
