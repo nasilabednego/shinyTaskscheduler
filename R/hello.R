@@ -111,7 +111,9 @@ active <- shiny::reactiveVal(T)
 
 # Output the time left.
 
-
+shiny::observeEvent(timerh()>1,{
+updateF7Popup(id='pop')
+})
 
 # observer that invalidates every second. If timer is active, decrease by one.
 shiny::observe({
