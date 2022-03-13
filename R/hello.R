@@ -137,7 +137,8 @@ shiny::observe({
 
 
 
-      }if(timerh()<1)
+      }else
+      if(timerh()<1)
       {
         active(F)}
     }
