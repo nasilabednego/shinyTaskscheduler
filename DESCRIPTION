@@ -1,7 +1,7 @@
 Package: shinyTaskscheduler
 Type: Package
 Title: Set time for Shiny app Server to execute your code
-Version: 0.1.1
+Version: 0.1.2
 Author: Abednego Nasila
 Maintainer: Abednego Nasila <alisanabednego@gmail.com>
 Description: Run shiny app functions at your specified time intervals.
