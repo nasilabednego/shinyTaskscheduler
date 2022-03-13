@@ -119,23 +119,23 @@ shiny::observe({
   shiny::isolate({
     if(active())
     {
-      timerh(timerh()-1)}else
+      timerh(timerh()-1)
       if(timerh()>1)
       {
         active(T)
 
-        shiny::showModal(shiny::modalDialog(size = 'l',
+        shinyMobile::f7Popup(id='pop',
                                 title = "Message",
                                 shiny::fluidPage(tags$b("Time Remaining: ", lubridate::seconds_to_period(timerh()))),
                                 alert_message
-          ))
+          )
 
 
 
       }else
       if(timerh()<1)
       {
-        active(F)
+        active(F)}
     }
   })
 })
