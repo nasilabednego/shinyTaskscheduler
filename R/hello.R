@@ -93,4 +93,54 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
+countdown<-function(Time_To='', alert_message=''){
+
+if(as.numeric(lubridate::seconds_to_period(Sys.time()))<=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59'))))){
+  shinyjs::delay(as.numeric(lubridate::seconds(round(
+    lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59')))-lubridate::seconds_to_period(Sys.time())))*1000),
+    shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1100); } setTimeout(reload_page, 1100); "))
+
+}
+# Initialize the timer, Time_To seconds, not active.
+timerh <- shiny::reactiveVal(
+  if(lubridate::seconds_to_period(Sys.time())>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), Time_To)))){
+    round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())+1), Time_To)))-lubridate::seconds_to_period(Sys.time()))
+  }else
+
+    round(
+      lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), Time_To)))-lubridate::seconds_to_period(as.POSIXct(Sys.time())))
+)
+
+
+active <- shiny::reactiveVal(T)
+
+# Output the time left.
+
+
+
+# observer that invalidates every second. If timer is active, decrease by one.
+shiny::observe({
+  shiny::invalidateLater(1000, session)
+  shiny::isolate({
+    if(active())
+    {
+      timerh(timerh()-1)
+      if(timerh()<1)
+      {
+        active(F)
+
+        shiny::showModal(shiny::modalDialog(size = 'l',
+                                title = "Message",
+                                shiny::fluidPage(tags$b("Time Remaining: ", lubridate::seconds_to_period(timerh()))),
+                                alert_message
+          ))
+
+
+
+      }
+    }
+  })
+})
+
+}
 
