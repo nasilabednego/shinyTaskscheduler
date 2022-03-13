@@ -119,16 +119,16 @@ shiny::observe({
   shiny::isolate({
     if(active())
     {
-      timerh(timerh()-9)
+      timerh(timerh()-1)
       if(timerh()>1)
       {
         active(T)
-showModal(modalDialog(
+
         
                                 title = "Message",
-                                shiny::fluidPage(tags$b("Time Remaining: ", lubridate::seconds_to_period(timerh()))),
-                                alert_message
-          ))
+                                shiny::fluidPage(tags$b("Time Remaining: ", lubridate::seconds_to_period(timerh())),hr(),
+                                alert_message)
+          
 
 
 
