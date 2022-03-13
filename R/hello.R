@@ -111,9 +111,7 @@ active <- shiny::reactiveVal(T)
 
 # Output the time left.
 
-shiny::observeEvent(timerh()>1,{
-updateF7Popup(id='pop')
-})
+
 
 # observer that invalidates every second. If timer is active, decrease by one.
 shiny::observe({
@@ -121,16 +119,16 @@ shiny::observe({
   shiny::isolate({
     if(active())
     {
-      timerh(timerh()-1)
+      timerh(timerh()-9)
       if(timerh()>1)
       {
         active(T)
-
-        shinyMobile::f7Popup(id='pop',
+showModal(modalDialog(
+        
                                 title = "Message",
                                 shiny::fluidPage(tags$b("Time Remaining: ", lubridate::seconds_to_period(timerh()))),
                                 alert_message
-          )
+          ))
 
 
 
