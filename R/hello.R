@@ -93,7 +93,7 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
-countdown<-function(Time_To='', alert_message='',output,session){
+countdown<-function(Time_To='',Note='', alert_message='',output,session){
 
 
 # Initialize the timer, Time_To seconds, not active.
@@ -124,8 +124,8 @@ shiny::observe({
       {
         active(T)
 output$showcountdown<-renderUI({
-                                shiny::fluidPage(tags$b("Time Remaining: ", lubridate::seconds_to_period(timerh())),hr(),
-                                alert_message)})
+                                shiny::fluidPage(tags$b(Note, lubridate::seconds_to_period(timerh())),hr(),
+                                tags$b(alert_message))})
           
 
       }else
