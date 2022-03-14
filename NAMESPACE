@@ -1,5 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 import(lubridate)
-importFrom(magrittr, %>%)
 importFrom(shinyjs, delay,toggle,useShinyjs)
 importFrom(shinyMobile,f7Icon)
