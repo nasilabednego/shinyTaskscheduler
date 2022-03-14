@@ -91,8 +91,8 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
-countdown<-function(event.starting_time='',event.closing_time='',Note.Bfr.Event='',Note.During.Event='',add_expr.Bfr.Event,add_expr.During.Event, output,session){
-
+eventCountdown <-function(event.starting_time='',event.closing_time='',input,output,session,Note.Bfr.Event='',Note.During.Event='',add_expr.Bfr.Event,add_expr.During.Event){
+obserEvent(input$btn,{shinyjs::toggle('eventCountdown')})
    if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))>=as.numeric(lubridate::seconds_to_period(Sys.time()))){
     shinyjs::delay(as.numeric(lubridate::seconds(round(
       lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))-lubridate::seconds_to_period(Sys.time())))*1000),
@@ -153,7 +153,7 @@ shiny::observe({
       if(timerh()>1)
       {
         active(T)
-output$showcountdown<-renderUI({
+output$eventCountdown<-renderUI({
     if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))){
       if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
                                 shiny::fluidPage(tags$b(shinyMobile::f7Button(inputId='btn',fill=F,label=shiny::taglist(shinyMobile::f7Icon('ellipsis_vertical',color='green'),'toggle show/hide')),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
