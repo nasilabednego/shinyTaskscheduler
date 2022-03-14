@@ -156,16 +156,16 @@ shiny::observe({
 output$eventCountdown<-renderUI({
     if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))){
       if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Button(inputId='btn',fill=F,label=shiny::tagList(shinyMobile::f7Icon('ellipsis_vertical',color='green'),'toggle show/hide')),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.Bfr.Event)}else
         if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Button(inputId='btn',fill=F,label=shiny::tagList(shinyMobile::f7Icon('ellipsis_vertical',color='green'),'toggle show/hide')),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.Bfr.Event)}else
             if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time())) &&
               lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-              shiny::fluidPage(tags$b(shinyMobile::f7Button(inputId='btn',fill=F,label=shiny::tagList(shinyMobile::f7Icon('ellipsis_vertical',color='green'),'toggle show/hide')),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+              shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
                     
                                                 add_expr.During.Event)
               }
@@ -174,16 +174,16 @@ output$eventCountdown<-renderUI({
     if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<=lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))){
     if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time())) &&
       lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Button(inputId='btn',fill=F,label=shiny::tagList(shinyMobile::f7Icon('ellipsis_vertical',color='green'),'toggle show/hide')),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.Bfr.Event)}else
        if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))
     ){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Button(inputId='btn',fill=F,label=shiny::tagList(shinyMobile::f7Icon('ellipsis_vertical',color='green'),'toggle show/hide')),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.During.Event)}else
          if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-           shiny::fluidPage(tags$b(shinyMobile::f7Button(inputId='btn',fill=F,label=shiny::tagList(shinyMobile::f7Icon('ellipsis_vertical',color='green'),'toggle show/hide')),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+           shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.During.Event)
            }
