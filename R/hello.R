@@ -91,7 +91,7 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
-countdown<-function(event.starting_time='',event.closing_time='',Note.Bfr.Event='',Note.Bfr.Event='',add_expr.Bfr.Event,add_expr.During.Event, output,session){
+countdown<-function(event.starting_time='',event.closing_time='',Note.Bfr.Event='',Note.During.Event='',add_expr.Bfr.Event,add_expr.During.Event, output,session){
 
    if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))>as.numeric(lubridate::seconds_to_period(Sys.time()))){
     shinyjs::delay(as.numeric(lubridate::seconds(round(
