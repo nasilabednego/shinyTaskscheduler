@@ -43,13 +43,11 @@ RunAtInterval.every24hr <-function(start,stop,expr) {
     shinyjs::delay(as.numeric(lubridate::seconds(round(
       lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), stop)))-lubridate::seconds_to_period(Sys.time())))*1000),
       shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1000); } setTimeout(reload_page, 1000); "))}
-
-  if(as.numeric(lubridate::seconds_to_period(Sys.time()))<=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59'))))){
+if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59'))))>as.numeric(lubridate::seconds_to_period(Sys.time()))){
     shinyjs::delay(as.numeric(lubridate::seconds(round(
       lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59')))-lubridate::seconds_to_period(Sys.time())))*1000),
-      shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1100); } setTimeout(reload_page, 1100); "))
-
-  }
+      shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1000); } setTimeout(reload_page, 1000); "))}
+ 
   eval(
 
     if(as.numeric(lubridate::seconds(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), start)))))<as.numeric(lubridate::seconds(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), stop)))))){
@@ -95,6 +93,22 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
 
 countdown<-function(event.starting_time='',event.closing_time='',Note='', alert_message='',output,session){
 
+   if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))>as.numeric(lubridate::seconds_to_period(Sys.time()))){
+    shinyjs::delay(as.numeric(lubridate::seconds(round(
+      lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))-lubridate::seconds_to_period(Sys.time())))*1000),
+      shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1000); } setTimeout(reload_page, 1000); "))}
+
+
+  if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time))))>as.numeric(lubridate::seconds_to_period(Sys.time()))){
+    shinyjs::delay(as.numeric(lubridate::seconds(round(
+      lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))-lubridate::seconds_to_period(Sys.time())))*1000),
+      shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1000); } setTimeout(reload_page, 1000); "))}
+if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59'))))>as.numeric(lubridate::seconds_to_period(Sys.time()))){
+    shinyjs::delay(as.numeric(lubridate::seconds(round(
+      lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59')))-lubridate::seconds_to_period(Sys.time())))*1000),
+      shinyjs::runjs( "function reload_page() { window.location.reload(); setTimeout(reload_page, 1000); } setTimeout(reload_page, 1000); "))}
+  
+  
 
 # Initialize the timer, Time_To seconds, not active.
 timerh <- shiny::reactiveVal(
@@ -111,10 +125,10 @@ timerh <- shiny::reactiveVal(
 
         if(as.numeric(lubridate::seconds_to_period(Sys.time()))>=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))
            )
-        {round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59')))-lubridate::seconds_to_period(Sys.time()))
+        {round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())+1), event.closing_time)))-lubridate::seconds_to_period(Sys.time()))
         }else
           if(as.numeric(lubridate::seconds_to_period(Sys.time()))<=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))))
-           {round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))-lubridate::seconds_to_period(Sys.time()))}
+           {round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())+1), event.closing_time)))-lubridate::seconds_to_period(Sys.time()))}
       }
   else
 
