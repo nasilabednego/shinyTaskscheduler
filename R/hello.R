@@ -93,17 +93,33 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
-countdown<-function(Time_To='',Note='', alert_message='',output,session){
+countdown<-function(event.starting_time='',event.closing_time='',Note='', alert_message='',output,session){
 
 
 # Initialize the timer, Time_To seconds, not active.
 timerh <- shiny::reactiveVal(
-  if(lubridate::seconds_to_period(Sys.time())>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), Time_To)))){
-    round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())+1), Time_To)))-lubridate::seconds_to_period(Sys.time()))
+  if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())+1), event.closing_time)))<=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59'))))){
+  if(lubridate::seconds_to_period(Sys.time())>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))) &&
+    lubridate::seconds_to_period(Sys.time())>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))){
+    round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())+1), event.starting_time)))-lubridate::seconds_to_period(Sys.time()))
   }else
+      if(lubridate::seconds_to_period(Sys.time())>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))) &&
+        lubridate::seconds_to_period(Sys.time())<lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))){
+        round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))-lubridate::seconds_to_period(Sys.time()))
+      }}else
+   if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time))))<=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))){
+
+        if(as.numeric(lubridate::seconds_to_period(Sys.time()))>=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))
+           )
+        {round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), '23:59:59')))-lubridate::seconds_to_period(Sys.time()))
+        }else
+          if(as.numeric(lubridate::seconds_to_period(Sys.time()))<=as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))))
+           {round(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))-lubridate::seconds_to_period(Sys.time()))}
+      }
+  else
 
     round(
-      lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), Time_To)))-lubridate::seconds_to_period(as.POSIXct(Sys.time())))
+      lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))-lubridate::seconds_to_period(as.POSIXct(Sys.time())))
 )
 
 
