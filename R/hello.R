@@ -91,7 +91,7 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
-countdown<-function(event.starting_time='',event.closing_time='',Note='', alert_message='',output,session){
+countdown<-function(event.starting_time='',event.closing_time='',Note.Bfr.Event='',Note.Bfr.Event='',add_expr.Bfr.Event,add_expr.During.Event, output,session){
 
    if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))>as.numeric(lubridate::seconds_to_period(Sys.time()))){
     shinyjs::delay(as.numeric(lubridate::seconds(round(
@@ -154,8 +154,44 @@ shiny::observe({
       {
         active(T)
 output$showcountdown<-renderUI({
-                                shiny::fluidPage(tags$b(Note, lubridate::seconds_to_period(timerh())),hr(),
-                                tags$b(alert_message))})
+    if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))){
+      if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
+                                shiny::fluidPage(tags$b(Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                tags$b(alert_message),
+                                                add_expr.Bfr.Event)}else
+        if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
+                                shiny::fluidPage(tags$b(Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                tags$b(alert_message),
+                                                add_expr.Bfr.Event)}else
+            if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time())) &&
+              lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
+              shiny::fluidPage(tags$b(Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+                    
+                                                add_expr.During.Event)
+              }
+          
+    }else
+    if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<=lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))){
+    if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time())) &&
+      lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
+                                shiny::fluidPage(tags$b(Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                
+                                                add_expr.Bfr.Event)}
+       if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))
+    ){
+                                shiny::fluidPage(tags$b(Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                
+                                                add_expr.During.Event)}else
+         if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
+           shiny::fluidPage(tags$b(Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                
+                                                add_expr.During.Event)
+           }
+      
+    }
+      
+      
+    })
           
 
       }else
