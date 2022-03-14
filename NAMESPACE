@@ -1,5 +1,4 @@
 exportPattern("^[[:alpha:]]+")
 import(lubridate)
-importFrom(shinyjs, delay)
-importFrom(shinyjs, useShinyjs)
-importFrom(shinyMobile,f7Popup,updateF7Popup)
+importFrom(shinyjs, delay,useShinyjs)
+importFrom(shinyMobile,f7Button,f7Icon)
