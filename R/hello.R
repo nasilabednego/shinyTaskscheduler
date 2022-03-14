@@ -92,7 +92,7 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
   )}
 
 eventCountdown <-function(event.starting_time='',event.closing_time='',input,output,session,Note.Bfr.Event='',Note.During.Event='',add_expr.Bfr.Event,add_expr.During.Event){
-obserEvent(input$btn,{shinyjs::toggle('eventCountdown')})
+shiny::observeEvent(input$btn,{shinyjs::toggle('eventCountdown')})
    if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))>=as.numeric(lubridate::seconds_to_period(Sys.time()))){
     shinyjs::delay(as.numeric(lubridate::seconds(round(
       lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))-lubridate::seconds_to_period(Sys.time())))*1000),
