@@ -1,0 +1,33 @@
+\name{Time}
+\alias{Time}
+\title{Show interactive system time}
+\usage{
+in ui
+TimeOutput()
+in server
+ Time(input,output,session) 
+}
+\description{
+  Gives interactive system time
+}
+\examples{
+
+
+  library(shiny)
+  library(shinyTaskscheduler)
+
+  # Define UI for application that draws a histogram
+  ui <- fluidPage(
+ TimeOutput()
+  )
+
+  # Define server logic required to draw a histogram
+  server <- function(input, output,session) {
+Time(input,output, session)
+
+  }
+
+  # Run the application
+  shinyApp(ui = ui, server = server)
+
+}
