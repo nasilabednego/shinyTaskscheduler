@@ -206,4 +206,136 @@ output$eventCountdown<-renderUI({
 })
 
 }
+    
+TimeOutput<-function(){
+  
+  fluidPage(uiOutput('div'),
+            f7Align(side='l',
+                    uiOutput('stng')),
+            f7Align(side='r',
+                    uiOutput('time')))
+}
+
+
+Time<-function(input,output, session){ timer<-reactiveVal(
+  Sys.time())
+
+vl<-reactiveVal(0)
+output$stng<-renderUI({
+  
+  actionBttn('stng','settings',icon = icon('cog'),style = 'str',color = 's')
+  
+  
+})
+
+observeEvent(input$tstng,{toggle('stng')})
+output$div<-renderUI({
+  
+  req(input$stng)
+  fluidPage(
+    showModal(modalDialog(title = 'settings',#plotOutput('uird'),
+                          splitLayout(fluidPage(useShinyjs(),
+                                                checkboxInput('boldtxt','bold',value = F),
+                                                actionBttn('tstng','toggle settings',icon = icon('cog'),style = 'str',color = 's')),
+                                      fluidPage(
+                                        textInput('color','type your color'),
+                                        selectInput('stl','style',choices = c('normal','italic','samp')),br(),br(),br(),
+                                        br()
+                                      )),
+                          
+                          sliderInput("inpu",
+                                      "Adjust:",
+                                      min = 30,
+                                      max = 1000,
+                                      value = 100)
+                          
+    )))
+}) 
+
+
+
+observeEvent(input$stng,{
+  output$time<-renderUI({
+    if(input$stl=='italic'){
+      if(input$boldtxt==T){
+        fluidRow(
+          div(style=paste0('font-size:',input$inpu,'%'),fluidPage(
+            tags$b(tags$i('Time:',
+                          timer()))
+            
+          ))
+        )}else{
+          fluidRow(
+            div(style=paste0('font-size:',input$inpu,'%'),fluidPage(
+              tags$i('Time:',
+                     timer())
+              
+            ))
+          )
+        }
+      
+      
+    }else
+      if(input$stl=='italic'){
+        if(input$boldtxt==T){
+          fluidRow(
+            div(style=paste0('font-size:',input$inpu,'%'),fluidPage(
+              tags$b(tags$samp('Time',
+                               timer()))
+              
+            ))
+          )}else{
+            fluidRow(
+              div(style=paste0('font-size:',input$inpu,'%'),fluidPage(
+                tags$samp('Time',
+                          timer())
+                
+              ))
+            )
+          }
+        
+        
+      }
+    
+    
+    
+    else{
+      if(input$boldtxt==T){
+        fluidRow(
+          div(style=paste0('font-size:',input$inpu,'%'),fluidPage(
+            tags$b('Time:',
+                   timer())
+            
+          ))
+        )}else{
+          fluidRow(
+            div(style=paste0('font-size:',input$inpu,'%'),fluidPage(
+              'Time:',
+              timer()
+              
+            ))
+          )
+        }}
+  })
+})
+
+output$time<-renderUI({fluidRow(
+  
+  div(style=paste0('font-size:',input$inpu,'%'),fluidPage(
+    
+    timer()
+  ))
+)
+})
+
+
+observe({
+  invalidateLater(1000,session)
+  isolate({
+    timer(timer()+1)})
+  
+  
+})}    
+    
+    
 
