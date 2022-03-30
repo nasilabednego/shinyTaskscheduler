@@ -29,7 +29,7 @@ reloadAt.every24hr <-function(time='') {
 }
 
 
-
+eventCountdownOutput<-function(){uiOutput('eventCountdown')}
 
 
 RunAtInterval.every24hr <-function(start,stop,expr) {
