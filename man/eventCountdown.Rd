@@ -3,7 +3,7 @@
 \title{Add event countdown and other information}
 \usage{
 # in ui
-uiOutput('eventCountdown')
+eventCountdownOutput()
 # in server
 eventCountdown(event.starting_time  = '15:00:00',event.closing_time = '5:00:00',Note.Bfr.Event = 'The event starts soon',Note.During.Event = 'In progress|',add_expr.Bfr.Event = 'Hamjambo!. Tunaanza hivi kwa muda uliosalia',output = output,add_expr.During.Event  = fluidPage(
     actionButton('hi.click.on.me',label='high click on me')
@@ -21,7 +21,7 @@ library(shinyTaskscheduler)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 applyshinySchedule(),
-uiOutput('eventCountdown')
+eventCountdownOutput()
 
 )
 
