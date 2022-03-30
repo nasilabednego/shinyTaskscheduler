@@ -91,7 +91,7 @@ runAtInterval.dates <-function(startDate,stopDate,expr) {
     }
   )}
 
-eventCountdown <-function(event.starting_time='',event.closing_time='',output,session,Note.Bfr.Event='',Note.During.Event='',add_expr.Bfr.Event,add_expr.During.Event){
+eventCountdown <-function(event.starting_time='',event.closing_time='',input,output,session,Note.Bfr.Event='',Note.During.Event='',add_expr.Bfr.Event,add_expr.During.Event){
 
    if(as.numeric(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time))))>=as.numeric(lubridate::seconds_to_period(Sys.time()))){
     shinyjs::delay(as.numeric(lubridate::seconds(round(
@@ -141,7 +141,9 @@ active <- shiny::reactiveVal(T)
 
 # Output the time left.
 
-
+shiny::observeEvent(input$stng,{
+shiny::showModal(shiny::modalDialog(title='settings'))
+})
 
 # observer that invalidates every second. If timer is active, decrease by one.
 shiny::observe({
@@ -154,18 +156,19 @@ shiny::observe({
       {
         active(T)
 output$eventCountdown<-renderUI({
+  
     if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))){
       if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyWidgets::actionBttn('stng','settings',shiny::icon('cog'),color='pri',style='str'),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.Bfr.Event)}else
         if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyWidgets::actionBttn('stng','settings',shiny::icon('cog'),color='pri',style='str'),Note.Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.Bfr.Event)}else
             if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time())) &&
               lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-              shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+              shiny::fluidPage(tags$b(shinyWidgets::actionBttn('stng','settings',shiny::icon('cog'),color='pri',style='str'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
                     
                                                 add_expr.During.Event)
               }
@@ -174,16 +177,16 @@ output$eventCountdown<-renderUI({
     if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<=lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))){
     if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time())) &&
       lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyWidgets::actionBttn('stng','settings',shiny::icon('cog'),color='pri',style='str'),Bfr.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.Bfr.Event)}else
        if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.starting_time)))<lubridate::seconds_to_period(as.POSIXct(Sys.time()))
     ){
-                                shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+                                shiny::fluidPage(tags$b(shinyWidgets::actionBttn('stng','settings',shiny::icon('cog'),color='pri',style='str'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.During.Event)}else
          if(lubridate::seconds_to_period(as.POSIXct(paste( paste0( lubridate::year(Sys.time()),'-',lubridate::month(Sys.time()),'-',lubridate::day(Sys.time())), event.closing_time)))>lubridate::seconds_to_period(as.POSIXct(Sys.time()))){
-           shiny::fluidPage(tags$b(shinyMobile::f7Icon('ellipsis_vertical',color='green'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
+           shiny::fluidPage(tags$b(shinyWidgets::actionBttn('stng','settings',shiny::icon('cog'),color='pri',style='str'),Note.During.Event, lubridate::seconds_to_period(timerh())),hr(),
                                 
                                                 add_expr.During.Event)
            }
